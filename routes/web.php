@@ -43,7 +43,7 @@ Route::name('students.')->prefix('students')->group(function () {
     Route::delete('/{id}', [StudentController::class, 'destroy'])->name('destroy');
 });
 
-//Management Data Guru (Invokable)
+//Management Data Guru 
 Route::name('teachers.')->prefix('teachers')->group(function () {
     // Halaman Daftar Guru
     Route::get('/', [TeacherController::class, 'index'])->name('index');
@@ -69,19 +69,19 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
 
 Route::prefix('classes')->name('classes.')->group(function () {
 
-        Route::get('/', [IndexController::class])->name('index');
+    Route::get('/', [IndexController::class])->name('index');
 
-        Route::get('/create', [CreateController::class])->name('create');
+    Route::get('/create', [CreateController::class])->name('create');
 
-        Route::post('/', [StoreController::class])->name('store');
+    Route::post('/', [StoreController::class])->name('store');
 
-        Route::get('/{id}', [ShowController::class])->name('show');
+    Route::get('/{id}', [ShowController::class])->name('show');
 
-        Route::get('/{id}/edit', [EditController::class])->name('edit');
+    Route::get('/{id}/edit', [EditController::class])->name('edit');
 
-        Route::put('/{id}', UpdateController::class)->name('update');
+    Route::put('/{id}', UpdateController::class)->name('update');
 
-        Route::delete('/{id}', DestroyController::class)->name('destroy');
+    Route::delete('/{id}', DestroyController::class)->name('destroy');
 });
 
 Route::resource('majors', MajorController::class);

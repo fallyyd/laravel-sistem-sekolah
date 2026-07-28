@@ -10,8 +10,10 @@ class EditController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke($id)
+    public function __invoke(Request $request)
     {
-        return "Displaying edit form for school class with ID: $id";
+        {
+        return "Menampilkan halaman edit kelas";
+        }
     }
-}
+    }

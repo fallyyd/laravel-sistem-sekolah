@@ -12,6 +12,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return "Displaying school class list";
+        return "Menampilkan halaman daftar kelas";
     }
 }
