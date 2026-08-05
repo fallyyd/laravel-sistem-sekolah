@@ -1,9 +1,9 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
-
+ 
 class StudentController extends Controller
 {
     public function index()
@@ -13,51 +13,62 @@ class StudentController extends Controller
             [
                 'id' => 1,
                 'nis' => '1001',
-                'name' => 'Andi',
+                'name' => 'Wilson',
                 'class' => 'XII TKJ 2',
                 'major' => 'TKJ'
             ],
             [
                 'id' => 2,
                 'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 2',
-                'major' => 'TKJ'
+                'name' => 'Kate',
+                'class' => 'X BID 1',
+                'major' => 'BID'
             ],
+            [
+                'id' => 3,
+                'nis' => '1003',
+                'name' => 'Louis',
+                'class' => 'XII TKJ 1',
+                'major' => 'TKJ'
+            ]
         ];
         return view('students.index', [
             'title' => $title,
-            'students' => $students
+            'students' => $students,
+ 
         ]);
     }
-
     public function show(string $id)
     {
-        return view('students.show');
+        $title = 'Sistem Sekolah - Detail Siswa';
+        return view('students.show', [
+            'title'=> $title
+        ]);
     }
-
     public function create()
     {
-        return view('students.create');
+        $title = 'Sistem Sekolah - Menambah Siswa';
+        return view ('students.create', [
+            'title'=> $title
+        ]);
     }
-
     public function edit(string $id)
     {
-        return view('students.edit');
+        $title = 'Sistem Sekolah - Edit data Siswa';
+        return view ('students.edit', [
+            'title'=> $title
+        ]);
     }
-
-    public function store(Request $request)
+    public function store()
     {
-        return "Melakukan penambahan data siswa baru";
+        return "Menampilkan halaman penambahan data siswa";
     }
-
-    public function update(Request $request, string $id)
+    public function update(string $id)
     {
         return "Melakukan perubahan data siswa";
     }
-
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        return "Menghapus data siswa";
+        return "menghapus data siswa";
     }
-}
+}   
