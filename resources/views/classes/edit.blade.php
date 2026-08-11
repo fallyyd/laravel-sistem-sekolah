@@ -21,7 +21,6 @@
 
             <div>
                 <label for="grade"
-                    class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Tingkatan</label>
                     class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Tingkat</label>
                 <input type="text" id="grade" name="grade" value="XII"
                     class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
@@ -55,4 +54,5 @@
                     Catatan</button>
             </div>
         </form>
-        @endsection
+
+@endsection

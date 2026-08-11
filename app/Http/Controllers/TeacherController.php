@@ -2,41 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class TeacherController extends Controller
 {
- public function index()
+    public function index()
     {
-        return "Ini adalah halaman daftar guru";
-    }
-
-    public function show(string $id)
-    {
-        return "Menampilkan detail guru dengan ID : {$id}";
+        $title = 'Sistem Sekolah - Daftar Guru';
+        $teachers = [
+            [
+                'id' => 1,
+                'nip' => '198501012024',
+                'name' => 'Budi Santoso',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone_number' => '081234560001',
+                'status' => 'Aktif',
+            ],
+            [
+                'id' => 2,
+                'nip' => '198703152024',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone_number' => '081234560002',
+                'status' => 'Aktif',
+            ]
+        ];
+        return view ('teachers.index' ,  [
+            'title' => $title,
+            'teachers' => $teachers,
+        ]);
     }
 
     public function create()
     {
-        return "Menampilkan halaman untuk tambah data guru";
+        $title = 'Sistem Sekolah - Tambah Guru';
+        return view ('teachers.create', [
+            'title' => $title
+        ]);
     }
 
-    public function edit(string $id)
+    public function store()
     {
-        return "Menampilkan halaman edit guru";
+        return "Melakukan penambahan data guru";
     }
 
-    public function store(Request $request)
+    public function show(string $id)
     {
-        return "Melakukan penambahan data guru baru";
+         $title = 'Sistem Sekolah - Detail Guru';
+        return view ('teachers.show', [
+            'title' => $title
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function edit()
+    {
+        $title = 'Sistem Sekolah - Edit Guru';
+        return view ('teachers.edit', [
+            'title' => $title
+        ]);
+    }
+
+    public function update()
     {
         return "Melakukan perubahan data guru";
     }
 
-    public function destroy(string $id)
+    public function destroy()
     {
         return "Menghapus data guru";
     }

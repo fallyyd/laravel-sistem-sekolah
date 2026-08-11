@@ -20,9 +20,6 @@
                 <thead>
                     <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
                         <th class="w-14 px-5 py-3.5 font-semibold">No.</th>
-                        <th class="w-14 px-5 py-3.5 font-semibold">ID</th>
-                        <th class="px-5 py-3.5 text-center font-semibold">Nama</th>
-                        <th class="px-5 py-3.5 font-semibold">Tingkatan</th>
                         <th class="px-5 py-3.5 font-semibold">Nama Kelas</th>
                         <th class="px-5 py-3.5 font-semibold">Tingkat</th>
                         <th class="px-5 py-3.5 font-semibold">Jurusan</th>
@@ -35,9 +32,6 @@
                     <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
                         <td class="px-5 py-4 font-display text-lg text-[#A16207]">
                             {{ $loop->iteration }}
-                        </td>
-                        <td class="px-5 py-4 font-mono text-xs text-slate-500">
-                            {{ $class['id'] }}
                         </td>
                         <td class="px-5 py-4">
                             {{ $class['name'] }}
@@ -66,7 +60,7 @@
                         </td>
                     </tr>
                     @endforeach
-
+                    
                 </tbody>
             </table>
         </div>
