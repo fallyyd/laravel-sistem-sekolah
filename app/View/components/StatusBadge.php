@@ -8,20 +8,16 @@ use Illuminate\View\Component;
 
 class StatusBadge extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public string $type;
-
-    public function __construct(string $type)
+    public function __construct(public string $type)
     {
-        $this->type = $type;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render()
+    public function isActive(): bool
+    {
+        return strtoupper($this->type) !== 'TIDAK AKTIF';
+    }
+
+    public function render(): View|Closure|string
     {
         return view('components.status-badge');
     }
