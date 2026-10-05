@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Http\Requests\Student\StoreRequest;
+use App\Http\Requests\Student\UpdateRequest;
 
 class StudentController extends Controller
 {
@@ -48,16 +50,10 @@ class StudentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         // Validasi
-        $validatedRequest = $request->validate([
-            'nis' => ['required', 'string', 'size:4', 'unique:students,nis'],
-            'name' => ['required', 'string'],
-            'gender' => ['required', 'string', 'in:Laki-Laki,Perempuan'],
-            'major' => ['required', 'string', 'in:AKL,TKJ,BiD'],
-            'class' => ['required', 'string']
-        ]);
+        $validatedRequest = $request->validated();
 
         // Tambahkan Data ke Database
         Student::create($validatedRequest);
@@ -66,16 +62,10 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-    public function update(Student $student, Request $request)
+    public function update(Student $student, UpdateRequest $request)
     {
         // Validasi
-        $validatedRequest = $request->validate([
-            'nis' => ['required', 'string', 'size:4', 'unique:students,nis,' . $student->id],
-            'name' => ['required', 'string'],
-            'gender' => ['required', 'string', 'in:Laki-laki,Perempuan'],
-            'major' => ['required', 'string', 'in:AKL,TKJ,BiD'],
-            'class' => ['required', 'string']
-        ]);
+        $validatedRequest = $request->validated();
 
         // Update Data 
         $student->update($validatedRequest);
@@ -84,8 +74,12 @@ class StudentController extends Controller
         return redirect()->route('students.index');
     }
 
-    public function destroy()
+    public function destroy(Student $student)
     {
-        return "Menghapus data siswa";
+        // Delete Data
+        $student->delete();
+
+        // Handle if Success
+        return redirect()->route('students.index');
     }
 }
