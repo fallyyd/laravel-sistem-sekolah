@@ -21,11 +21,11 @@ Route::name('students.')->prefix('students')->group(function () {
     // Halaman Daftar Siswa
     Route::get('/', [StudentController::class, 'index'])->name('index');
 
-    // Halaman Detail Siswa
-    Route::get('/{student}', [StudentController::class, 'show'])->name('show')->whereNumber('id');
-
     // Halaman Tambah Siswa
     Route::get('/create', [StudentController::class, 'create'])->name('create');
+
+    // Halaman Detail Siswa
+    Route::get('/{student}', [StudentController::class, 'show'])->name('show')->whereNumber('student');
 
     // Halamann Edit Siswa
     Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('edit');
