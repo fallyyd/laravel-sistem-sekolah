@@ -94,3 +94,4 @@ Route::name('classes.')->middleware(['role:teacher', 'auth'])->prefix('classes')
     Route::put('/{id}', UpdateController::class)->name('update');
 
     Route::delete('/{id}', DestroyController::class)->name('destroy');
+});
