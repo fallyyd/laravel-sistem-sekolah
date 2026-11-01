@@ -11,12 +11,21 @@ use App\Http\Controllers\SchoolClass\StoreController;
 use App\Http\Controllers\SchoolClass\UpdateController;
 use App\Http\Controllers\SchoolClass\DestroyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::name('students.')->prefix('students')->group(function () {
+// Authentication
+Route::get('/login', [AuthController::class, 'loginview'])->name('login-view')->middleware('guest');
+Route::post('/login', [AuthController::class, 'loginPost'])->name('login-post')->middleware('guest');
+Route::get('/register', [AuthController::class, 'registerView'])->name('register-view')->middleware('guest');
+Route::post('/register', [AuthController::class, 'registerPost'])->name('register-post')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+
+Route::name('students.')->middleware(['role:student,teacher', 'auth'])->prefix('students')->group(function () {
 
     // Halaman Daftar Siswa
     Route::get('/', [StudentController::class, 'index'])->name('index');
@@ -40,7 +49,9 @@ Route::name('students.')->prefix('students')->group(function () {
     Route::delete('/{student}', [StudentController::class, 'destroy'])->name('destroy');
 });
 
-Route::name('teachers.')->prefix('teachers')->group(function () {
+
+// Teacher Management
+Route::name('teachers.')->middleware(['role:teacher', 'auth'])->prefix('teachers')->group(function () {
 
     // Halaman Daftar Guru
     Route::get('/', [TeacherController::class, 'index'])->name('index');
@@ -64,9 +75,11 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
     Route::delete('/{id}', [TeacherController::class, 'destroy'])->name('destroy');
 });
 
-Route::resource('majors', MajorController::class);
+// Major Management
+Route::resource('majors', MajorController::class)->middleware(['role:teacher', 'auth']);
 
-Route::name('classes.')->prefix('classes')->group(function () {
+// School Class Management
+Route::name('classes.')->middleware(['role:teacher', 'auth'])->prefix('classes')->group(function () {
 
     Route::get('/', IndexController::class)->name('index');
 
@@ -81,5 +94,3 @@ Route::name('classes.')->prefix('classes')->group(function () {
     Route::put('/{id}', UpdateController::class)->name('update');
 
     Route::delete('/{id}', DestroyController::class)->name('destroy');
-
-});
